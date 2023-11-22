@@ -33,33 +33,24 @@
             }
         </style>
         <div class="d-flex flex-column flex-column-fluid flex-lg-row">
-            <div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
-                <div class="d-flex flex-center flex-lg-start flex-column">
-                    <!-- Logo -->
-                    <span class="mb-7">
-                        <img alt="Logo" src="<?php echo base_url('assets/media/logos/logoWhite.png'); ?>"  class="w-25" />
-                    </span>
-                    <!-- Title -->
-                    <h2 class="text-white fw-normal m-0">Panel de Administración diseñado para tu negocio.</h2>
-                </div>
-            </div>
-            <div class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12 p-lg-20">
+
+            <div class="d-flex flex-column-fluid justify-content-center justify-content-center p-12 p-lg-20">
                 <div class="bg-body d-flex flex-column align-items-stretch flex-center rounded-4 w-md-600px p-20">
                     <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
                         <div class="form w-100">
                             <div class="text-center mb-11">
+                                <!-- Logo -->
+                                <span class="mb-7">
+                                    <img alt="Logo" src="<?php echo base_url('assets/media/logos/logoDark.png'); ?>" class="w-50" />
+                                </span>
                                 <h1 class="text-dark fw-bolder mb-3">Inicio de Sesión</h1>
                                 <div class="text-gray-500 fw-semibold fs-6">Introduzca su Clave de Acceso</div>
                             </div>
                             <div class="separator separator-content my-14">
-                                <span class="w-125px text-gray-500 fw-semibold fs-7">Panel del Administador</span>
+                                <span class="w-125px text-gray-500 fw-semibold fs-7">Administador</span>
                             </div>
                             <div class="fv-row mb-8">
                                 <input type="password" placeholder="Clave de Acceso" autocomplete="off" class="form-control bg-transparent" />
-                            </div>
-                            <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-                                <div></div>
-                                <a href="" class="link-primary">Olvidé mi Clave ?</a>
                             </div>
                             <div class="d-grid mb-10">
                                 <button type="button" id="btn-signin-admin" class="btn btn-primary">Entrar</button>
@@ -71,5 +62,4 @@
         </div>
     </div>
 </body>
-
 </html>
