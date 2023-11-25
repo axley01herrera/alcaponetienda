@@ -7,5 +7,10 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-# Admin
+# Auth
 $routes->get('Auth/admin', 'Auth::admin');
+$routes->post('Auth/loginAdmin', 'Auth::loginAdmin');
+
+# Control Panel
+$routes->get('ControlPanel/dashboard', 'ControlPanel::dashboard');
+

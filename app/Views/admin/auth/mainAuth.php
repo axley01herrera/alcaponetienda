@@ -49,11 +49,13 @@
                             <div class="separator separator-content my-14">
                                 <span class="w-125px text-gray-500 fw-semibold fs-7">Administador</span>
                             </div>
+                            <!-- Input Access Key -->
                             <div class="fv-row mb-8">
-                                <input type="password" placeholder="Clave de Acceso" autocomplete="off" class="form-control bg-transparent" />
+                                <input type="password" id="txt-accessKey<?php echo $uniqid; ?>" placeholder="Clave de Acceso" autocomplete="off" class="form-control bg-transparent" />
                             </div>
+                            <!-- Button Sig In Admin -->
                             <div class="d-grid mb-10">
-                                <button type="button" id="btn-signin-admin" class="btn btn-primary">Entrar</button>
+                                <button type="button" id="btn-signin-admin<?php echo $uniqid; ?>" class="btn btn-primary">Entrar</button>
                             </div>
                         </div>
                     </div>
@@ -62,4 +64,49 @@
         </div>
     </div>
 </body>
+
 </html>
+
+<script>
+    $(document).ready(function() {
+        let msg = "<?php echo $msg; ?>";
+        if (msg == "sessionExpired")
+            simpleAlert('warning', 'Su Sesión ha Expirado!');
+
+        $('#btn-signin-admin<?php echo $uniqid; ?>').on('click', function() { // Sign In
+            let accessKey = $('#txt-accessKey<?php echo $uniqid; ?>').val();
+            if (accessKey != "") {
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url('Auth/loginAdmin'); ?>",
+                    data: {
+                        'accessKey': accessKey
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        if (res.error == 0) { // Success
+                            window.location.href = "<?php echo base_url('ControlPanel/dashboard'); ?>"
+                        } else if (res.error == 1) { // Error
+                            if (res.msg == "INVALID_ACCESS_KEY") {
+                                simpleAlert('warning', 'Rectifique su Clave de Acceso!', 'center');
+                                $('#txt-accessKey<?php echo $uniqid; ?>').addClass('is-invalid');
+                            } else if (res.msg == "NOT_FOUND") {
+                                simpleAlert('error', 'Ha ocurrido un error, pongase en contacto con el creador del sistema!', 'center');
+                            }
+                        }
+                    },
+                    error: function(e) {
+                        simpleAlert('error', 'Ha ocurrido un error!', 'center');
+                    }
+                });
+            } else {
+                simpleAlert('warning', 'Introduzca su Clave de Acceso!', 'center');
+                $('#txt-accessKey<?php echo $uniqid; ?>').addClass('is-invalid');
+            }
+        });
+
+        $('#txt-accessKey<?php echo $uniqid; ?>').on('focus', function() {
+            $(this).removeClass('is-invalid');
+        });
+    });
+</script>
