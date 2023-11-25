@@ -20,6 +20,23 @@ class ControlPanel extends BaseController
         if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin')
             return view('layouts/logoutAdmin');
 
-        echo "Dashboard";
+        $data = array();
+        # menu
+        $data['activeDashboard'] = "active";
+        # page
+        $data['page'] = "admin/dashboard/mainDashboard";
+
+        return view('layouts/controlPanel', $data);
+    }
+
+    public function catgories()
+    {
+        # Verify Session
+        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin')
+            return view('layouts/logoutAdmin');
+
+        $data = array();
+        # menu
+        $data[''] = "active";
     }
 }
