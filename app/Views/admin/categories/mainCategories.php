@@ -44,7 +44,7 @@
         <!-- Page Container -->
         <div id="kt_app_content_container" class="app-container container-xxl">
             <div class="row">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-6">
                     <div class="card mb-5 mb-xl-10 shadow">
                         <div class="card-header border-0">
                             <div class="card-title">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-6">
                     <div class="card mb-5 mb-xl-10 shadow">
                         <div class="card-header border-0">
                             <div class="card-title">
@@ -81,12 +81,12 @@
                         <div class="card-header border-0">
                             <div class="card-title">
                                 <div class="d-flex align-items-center position-relative ">
-                                    <h5>Sub Categorías</h5>
+                                    <h5>Listado de Sub Categorías</h5>
                                 </div>
                             </div>
                             <div class="card-toolbar">
                                 <div class="m-0">
-                                    <div id="datatable-search-subCat"></div>
+                                    <div id="search-subCat"></div>
                                 </div>
                             </div>
                         </div>
@@ -104,6 +104,7 @@
     $(document).ready(function() {
 
         categoryDT();
+        subCategoryDT();
 
         $('#add-category').on('click', function(e) { // Add Category
             e.preventDefault();
@@ -121,10 +122,24 @@
                     simpleAlert('error', 'Ha ocurrido un error!', 'center');
                 }
             });
-        });
+        }); // ok
 
-        $('#add-subCategory').on('click', function() { // Add Sub Category
+        $('#add-subCategory').on('click', function(e) { // Add Sub Category
             e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "<?php echo base_url('ControlPanel/modalSubCat') ?>",
+                data: {
+                    'action': 'create'
+                },
+                dataType: "html",
+                success: function(res) {
+                    $('#app-modal').html(res);
+                },
+                error: function(error) {
+                    simpleAlert('error', 'Ha ocurrido un error!', 'center');
+                }
+            });
         });
     });
 
@@ -156,7 +171,7 @@
                 simpleAlert('error', 'Ha ocurrido un error!', 'center');
             }
         });
-    }
+    } // ok
 
     function subCategoryDT() {
         $.ajax({
