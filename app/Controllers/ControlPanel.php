@@ -34,6 +34,26 @@ class ControlPanel extends BaseController
         return view('layouts/controlPanel', $data);
     }
 
+    ####
+    ## Section Cat
+    ####
+
+    public function groupCat()
+    {
+        # Verify Session
+        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin')
+            return view('layouts/logoutAdmin');
+
+        $data = array();
+        # data
+        $data['dtCategory'] = $this->objMainModel->objData('cat');
+        $data['dtSubCategory'] = $this->objMainModel->objData('sub_cat');
+        $data['totalCategory'] = sizeof($data['dtCategory']);
+        $data['totalSubCategory'] = sizeof($data['dtSubCategory']);
+        
+        return view('admin/categories/dtGroupCat', $data);
+    }
+
     public function catgories()
     {
         # Verify Session
@@ -47,7 +67,7 @@ class ControlPanel extends BaseController
         $data['page'] = "admin/categories/mainCategories";
 
         return view('layouts/controlPanel', $data);
-    }
+    } // ok
 
     public function categoryDT()
     {
@@ -60,7 +80,7 @@ class ControlPanel extends BaseController
         $data['categories'] = $this->objMainModel->objData('cat');
 
         return view('admin/categories/dtCat', $data);
-    }
+    } // ok
 
     public function modalCat()
     {
@@ -85,7 +105,7 @@ class ControlPanel extends BaseController
         }
 
         return view('admin/categories/modalCat', $data);
-    }
+    } // ok
 
     public function createCat()
     {
@@ -113,7 +133,7 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
-    }
+    } // ok
 
     public function updateCat()
     {
@@ -142,7 +162,7 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
-    }
+    } // ok
 
     public function subCategoryDT()
     {
@@ -155,7 +175,7 @@ class ControlPanel extends BaseController
         $data['subCategories'] = $this->objMainModel->objData('sub_cat');
 
         return view('admin/categories/dtSubCat', $data);
-    }
+    } // ok
 
     public function modalSubCat()
     {
@@ -183,7 +203,7 @@ class ControlPanel extends BaseController
         }
 
         return view('admin/categories/modalSubCat', $data);
-    }
+    } // ok
 
     public function createSubCat()
     {
@@ -217,7 +237,7 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
-    }
+    } // ok
 
     public function updateSubCat()
     {
@@ -252,5 +272,9 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
-    }
+    } // ok
+
+    ####
+    ## End Section Cat
+    ####
 }

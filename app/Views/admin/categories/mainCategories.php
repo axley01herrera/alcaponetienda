@@ -103,6 +103,7 @@
 <script>
     $(document).ready(function() {
 
+        groupCat();
         categoryDT();
         subCategoryDT();
 
@@ -140,7 +141,7 @@
                     simpleAlert('error', 'Ha ocurrido un error!', 'center');
                 }
             });
-        });
+        }); // ok
     });
 
     function groupCat() {
@@ -156,7 +157,7 @@
                 simpleAlert('error', 'Ha ocurrido un error!', 'center');
             }
         });
-    }
+    } // ok
 
     function categoryDT() {
         $.ajax({
@@ -186,5 +187,5 @@
                 simpleAlert('error', 'Ha ocurrido un error!', 'center');
             }
         });
-    }
+    } // ok
 </script>

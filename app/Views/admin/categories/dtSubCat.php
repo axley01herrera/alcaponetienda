@@ -13,7 +13,7 @@
                     <td><?php echo $subCat->sub_category; ?></td>
                     <td><?php echo getCatByID($subCat->id_cat); ?></td>
                     <td class="text-end">
-                        <a data-subCat-id="<?php echo $subCat->id; ?>" data-cat-id="<?php echo $subCat->id_cat; ?>" href="#" class="btn btn-sm btn-light btn-active-color-primary edit-subCat" title="Editar Categoría"><i class="bi bi-pencil-square"></i></a>
+                        <a data-subCat-id="<?php echo $subCat->id; ?>" data-cat-id="<?php echo $subCat->id_cat; ?>" href="#" class="btn btn-sm btn-light btn-active-color-primary edit-subCat" title="Editar Sub Categoría"><i class="bi bi-pencil-square"></i></a>
                     </td>
                 </tr>
             <?php } ?>
