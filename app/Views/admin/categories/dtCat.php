@@ -18,8 +18,6 @@
         </tbody>
     </table>
 </div>
-<?php // var_dump($categories); 
-?>
 
 <script>
     $(document).ready(function() {
@@ -39,7 +37,7 @@
                 $('#search-cat').html('');
                 $('#dt-cat_filter').appendTo('#search-cat');
             }
-        });
+        }); // ok
 
         dtCat.on('click', '.edit-cat', function(e) { // Edit Cat
             e.preventDefault();
@@ -59,6 +57,6 @@
                     simpleAlert('error', 'Ha ocurrido un error!', 'center');
                 }
             });
-        });
+        }); // ok
     });
 </script>
