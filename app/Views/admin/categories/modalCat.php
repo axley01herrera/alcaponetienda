@@ -63,7 +63,7 @@
                             }, "2000");
                         } else if (res.error == 1) {
                             if (res.msg == "DUPLICATE_RECORD") {
-                                simpleAlert('warning', 'Ya existe la categoría!', 'center');
+                                simpleAlert('warning', 'Ya Existe la Categoría!', 'center');
                                 $('#txt-cat<?php echo $uniqid; ?>').addClass('is-invalid');
                             } else if (res.msg == "SESSION_EXPIRED") {
                                 window.location.href = "<?php echo base_url('Auth/admin?msg=sessionExpired'); ?>";
@@ -75,8 +75,8 @@
                     }
                 });
             } else
-                simpleAlert('warning', 'Categoría requerida!', 'center');
-        });
+                simpleAlert('warning', 'Hay Campos Requeridos!', 'center');
+        }); // ok
 
         function checkRequiredValues() {
             let result = 0;
