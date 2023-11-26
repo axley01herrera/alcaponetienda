@@ -14,10 +14,12 @@
     <!-- App CSS-->
     <link href="<?php echo base_url('assets/plugins/global/plugins.bundle.css'); ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url('assets/css/style.bundle.css'); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url('public/assets/plugins/custom/datatables/datatables.bundle.css'); ?>" rel="stylesheet" type="text/css" />
 
     <!-- App JS -->
     <script src="<?php echo base_url('assets/plugins/global/plugins.bundle.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/scripts.bundle.js'); ?>"></script>
+    <script src="<?php echo base_url('public/assets/plugins/custom/datatables/datatables.bundle.js'); ?>"></script>
 
     <script>
         var hostUrl = "<?php echo base_url('assets/'); ?>";
