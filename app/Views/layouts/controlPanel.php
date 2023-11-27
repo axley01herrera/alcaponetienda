@@ -28,10 +28,16 @@
                                         <span class="menu-title">Tablero</span>
                                     </span>
                                 </a>
-                                <!-- Dashboard -->
+                                <!-- Categories -->
                                 <a href="<?php echo base_url('ControlPanel/catgories'); ?>" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
                                     <span class="menu-link <?php echo @$activeCat; ?>">
                                         <span class="menu-title">Categorías</span>
+                                    </span>
+                                </a>
+                                <!-- Products -->
+                                <a href="<?php echo base_url('ControlPanel/products'); ?>" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
+                                    <span class="menu-link <?php echo @$activeProducts; ?>">
+                                        <span class="menu-title">Productos</span>
                                     </span>
                                 </a>
                             </div>

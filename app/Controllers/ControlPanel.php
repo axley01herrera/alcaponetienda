@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ControlPanelModel;
 use App\Models\MainModel;
 
 class ControlPanel extends BaseController
@@ -9,12 +10,14 @@ class ControlPanel extends BaseController
     protected $objRequest;
     protected $objSession;
     protected $objMainModel;
+    protected $objControlPanelModel;
 
     public function __construct()
     {
         $this->objRequest = \Config\Services::request();
         $this->objSession = session();
         $this->objMainModel = new MainModel;
+        $this->objControlPanelModel = new ControlPanelModel;
 
         helper('Site');
     }
@@ -38,22 +41,6 @@ class ControlPanel extends BaseController
     ## Section Cat
     ####
 
-    public function groupCat()
-    {
-        # Verify Session
-        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin')
-            return view('layouts/logoutAdmin');
-
-        $data = array();
-        # data
-        $data['dtCategory'] = $this->objMainModel->objData('cat');
-        $data['dtSubCategory'] = $this->objMainModel->objData('sub_cat');
-        $data['totalCategory'] = sizeof($data['dtCategory']);
-        $data['totalSubCategory'] = sizeof($data['dtSubCategory']);
-        
-        return view('admin/categories/dtGroupCat', $data);
-    }
-
     public function catgories()
     {
         # Verify Session
@@ -68,6 +55,22 @@ class ControlPanel extends BaseController
 
         return view('layouts/controlPanel', $data);
     } // ok
+
+    public function groupCat()
+    {
+        # Verify Session
+        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin')
+            return view('layouts/logoutAdmin');
+
+        $data = array();
+        # data
+        $data['dtCategory'] = $this->objMainModel->objData('cat');
+        $data['dtSubCategory'] = $this->objMainModel->objData('sub_cat');
+        $data['totalCategory'] = sizeof($data['dtCategory']);
+        $data['totalSubCategory'] = sizeof($data['dtSubCategory']);
+
+        return view('admin/categories/dtGroupCat', $data);
+    } // 0k
 
     public function categoryDT()
     {
@@ -277,4 +280,58 @@ class ControlPanel extends BaseController
     ####
     ## End Section Cat
     ####
+
+    ####
+    ## Section Products
+    ###
+
+    public function products()
+    {
+        # Verify Session
+        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin')
+            return view('layouts/logoutAdmin');
+
+        $data = array();
+        # menu
+        $data['activeProducts'] = "active";
+        # page
+        $data['page'] = "admin/products/mainProducts";
+
+        return view('layouts/controlPanel', $data);
+    }
+
+    public function modalProduct()
+    {
+        # Verify Session
+        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin')
+            return view('layouts/logoutAdmin');
+
+        # params
+        $action = $this->request->getPost('action');
+
+        $data = array();
+        # data
+        $data['uniqid'] = uniqid();
+        $data['action'] = $action;
+        $data['categories'] = $this->objMainModel->objData('cat');
+
+        if($action == "create") {
+            $data['modalTitle'] = "Nuevo Producto";
+        }
+
+        return view('admin/products/modalProduct', $data);
+    }
+
+    public function getSelSubCatsByCat()
+    {
+        # params
+        $catID = $this->request->getPost('catID');
+
+        $data = array();
+        # data
+        $data['uniqid'] = uniqid();
+        $data['subCats'] = $this->objControlPanelModel->getSubCats(null, $catID);
+
+        return view('admin/products/selSubCat', $data);
+    }
 }
