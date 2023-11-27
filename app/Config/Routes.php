@@ -7,12 +7,20 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-############# Auth #################
+#### 
+## Auth 
+####
 
 $routes->get('Auth/admin', 'Auth::admin');
 $routes->post('Auth/loginAdmin', 'Auth::loginAdmin');
 
-############# Control Panel #################
+#### 
+## End Auth 
+####
+
+#### 
+## Control Panel 
+####
 
 $routes->get('ControlPanel/dashboard', 'ControlPanel::dashboard');
 # Control Panel -> Categories
@@ -32,4 +40,8 @@ $routes->post('ControlPanel/modalProduct', 'ControlPanel::modalProduct');
 $routes->post('ControlPanel/getSelSubCatsByCat', 'ControlPanel::getSelSubCatsByCat');
 $routes->post('ControlPanel/createProduct', 'ControlPanel::createProduct');
 $routes->post('ControlPanel/updateProduct', 'ControlPanel::updateProduct');
+
+#### 
+## End Control Panel 
+####
 
