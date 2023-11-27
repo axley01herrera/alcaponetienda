@@ -223,23 +223,13 @@ class ControlPanel extends BaseController
         $catID = $this->objRequest->getPost('catID');
         $subCat = $this->objRequest->getPost('subCat');
 
-        $duplicateSubCat = $this->objMainModel->objCheckDuplicate('sub_cat', 'sub_category', $subCat);
+        $data = array();
+        $data['id_cat'] = $catID;
+        $data['sub_category'] = $subCat;
 
-        if (empty($duplicateSubCat)) {
-            $data = array();
-            $data['id_cat'] = $catID;
-            $data['sub_category'] = $subCat;
+        $result = $this->objMainModel->objCreate('sub_cat', $data);
 
-            $result = $this->objMainModel->objCreate('sub_cat', $data);
-
-            return json_encode($result);
-        } else {
-            $result = array();
-            $result['error'] = 1;
-            $result['msg'] = "DUPLICATE_RECORD";
-
-            return json_encode($result);
-        }
+        return json_encode($result);
     } // ok
 
     public function updateSubCat()
@@ -258,23 +248,13 @@ class ControlPanel extends BaseController
         $subCat = $this->objRequest->getPost('subCat');
         $subCatID = $this->objRequest->getPost('subCatID');
 
-        $duplicateSubCat = $this->objMainModel->objCheckDuplicate('sub_cat', 'sub_category', $subCat, $subCatID);
+        $data = array();
+        $data['id_cat'] = $catID;
+        $data['sub_category'] = $subCat;
 
-        if (empty($duplicateSubCat)) {
-            $data = array();
-            $data['id_cat'] = $catID;
-            $data['sub_category'] = $subCat;
+        $result = $this->objMainModel->objUpdate('sub_cat', $data, $subCatID);
 
-            $result = $this->objMainModel->objUpdate('sub_cat', $data, $subCatID);
-
-            return json_encode($result);
-        } else {
-            $result = array();
-            $result['error'] = 1;
-            $result['msg'] = "DUPLICATE_RECORD";
-
-            return json_encode($result);
-        }
+        return json_encode($result);
     } // ok
 
     ####
