@@ -101,48 +101,45 @@
 </div>
 
 <script>
-    $(document).ready(function() {
+    groupCat();
+    categoryDT();
+    subCategoryDT();
 
-        groupCat();
-        categoryDT();
-        subCategoryDT();
+    $('#add-category').on('click', function(e) { // Add Category
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "<?php echo base_url('ControlPanel/modalCat') ?>",
+            data: {
+                'action': 'create'
+            },
+            dataType: "html",
+            success: function(res) {
+                $('#app-modal').html(res);
+            },
+            error: function(error) {
+                simpleAlert('error', 'Ha ocurrido un error!', 'center');
+            }
+        });
+    }); // ok
 
-        $('#add-category').on('click', function(e) { // Add Category
-            e.preventDefault();
-            $.ajax({
-                type: "post",
-                url: "<?php echo base_url('ControlPanel/modalCat') ?>",
-                data: {
-                    'action': 'create'
-                },
-                dataType: "html",
-                success: function(res) {
-                    $('#app-modal').html(res);
-                },
-                error: function(error) {
-                    simpleAlert('error', 'Ha ocurrido un error!', 'center');
-                }
-            });
-        }); // ok
-
-        $('#add-subCategory').on('click', function(e) { // Add Sub Category
-            e.preventDefault();
-            $.ajax({
-                type: "post",
-                url: "<?php echo base_url('ControlPanel/modalSubCat') ?>",
-                data: {
-                    'action': 'create'
-                },
-                dataType: "html",
-                success: function(res) {
-                    $('#app-modal').html(res);
-                },
-                error: function(error) {
-                    simpleAlert('error', 'Ha ocurrido un error!', 'center');
-                }
-            });
-        }); // ok
-    });
+    $('#add-subCategory').on('click', function(e) { // Add Sub Category
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "<?php echo base_url('ControlPanel/modalSubCat') ?>",
+            data: {
+                'action': 'create'
+            },
+            dataType: "html",
+            success: function(res) {
+                $('#app-modal').html(res);
+            },
+            error: function(error) {
+                simpleAlert('error', 'Ha ocurrido un error!', 'center');
+            }
+        });
+    }); // ok
 
     function groupCat() {
         $.ajax({

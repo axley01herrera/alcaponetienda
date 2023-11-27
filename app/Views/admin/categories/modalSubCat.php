@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <div class="row">
                     <!-- Cat -->
-                    <div class="col-12">
+                    <div class="col-12 mb-5">
                         <label class="fs-6 fw-semibold" for="sel-cat<?php echo $uniqid; ?>">Categoría <span class="text-danger">*</span></label>
                         <select id="sel-cat<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>">
                             <option value=""></option>
@@ -65,10 +65,10 @@
 
                 if (action == "create") {
                     url = "<?php echo base_url('ControlPanel/createSubCat'); ?>";
-                    msg = "Sub Categoría Creada Satisfactoriamente!";
+                    msg = "Sub Categoría creada!";
                 } else {
                     url = "<?php echo base_url("ControlPanel/updateSubCat"); ?>";
-                    msg = "Sub Categoría Actualizada Satisfactoriamente!";
+                    msg = "Sub Categoría actualizada!";
                 }
 
                 $.ajax({
@@ -88,7 +88,7 @@
                             }, "2000");
                         } else if (res.error == 1) {
                             if (res.msg == "DUPLICATE_RECORD") {
-                                simpleAlert('warning', 'Ya Existe la Sub Categoría!', 'center');
+                                simpleAlert('warning', 'Ya existe la sub categoría!', 'center');
                                 $('#txt-sub-cat<?php echo $uniqid; ?>').addClass('is-invalid');
                             } else if (res.msg == "SESSION_EXPIRED") {
                                 window.location.href = "<?php echo base_url('Auth/admin?msg=sessionExpired'); ?>";
@@ -100,7 +100,7 @@
                     }
                 });
             } else {
-                simpleAlert('warning', 'Hay Campos Requeridos!', 'center');
+                simpleAlert('warning', 'Hay campos requeridos!', 'center');
                 if (catID == "") {
                     $('.select2-selection').each(function() {
                         $(this).addClass('is-invalid');

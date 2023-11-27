@@ -41,10 +41,10 @@
 
                 if (action == "create") {
                     url = "<?php echo base_url('ControlPanel/createCat'); ?>";
-                    msg = "Categoría Creada Satisfactoriamente!";
+                    msg = "Categoría creada !";
                 } else {
                     url = "<?php echo base_url("ControlPanel/updateCat"); ?>";
-                    msg = "Categoría Actualizada Satisfactoriamente!";
+                    msg = "Categoría actualizada!";
                 }
 
                 $.ajax({
@@ -63,7 +63,7 @@
                             }, "2000");
                         } else if (res.error == 1) {
                             if (res.msg == "DUPLICATE_RECORD") {
-                                simpleAlert('warning', 'Ya Existe la Categoría!', 'center');
+                                simpleAlert('warning', 'Ya existe la categoría!', 'center');
                                 $('#txt-cat<?php echo $uniqid; ?>').addClass('is-invalid');
                             } else if (res.msg == "SESSION_EXPIRED") {
                                 window.location.href = "<?php echo base_url('Auth/admin?msg=sessionExpired'); ?>";
@@ -75,7 +75,7 @@
                     }
                 });
             } else
-                simpleAlert('warning', 'Hay Campos Requeridos!', 'center');
+                simpleAlert('warning', 'Hay campos requeridos!', 'center');
         }); // ok
 
         function checkRequiredValues() {

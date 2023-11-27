@@ -25,5 +25,29 @@ class ControlPanelModel extends Model
             $query->where('id_cat', $catID);
 
         return $query->get()->getResult();
-    }
+    } // ok
+
+    public function getProductDT()
+    {
+        $query = $this->db->table('product p')
+        ->select('
+        p.id AS productID,
+        p.id_cat AS catID,
+        p.id_sub_cat AS subCatID,
+        p.name AS productName,
+        p.code AS productCode,
+        p.cost AS productCost,
+        p.price AS productPrice,
+        p.profesional_price AS profesionalProductPrice,
+        cat.cat AS category,
+        sub_cat.sub_category AS subCategory
+        ');
+
+        $query->join('cat', 'cat.id = p.id_cat');
+        $query->join('sub_cat', 'sub_cat.id = p.id_sub_cat');
+
+        $data = $query->get()->getResult();
+
+        return $data;
+    } // ok
 }

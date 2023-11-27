@@ -39,29 +39,111 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!-- Page Container -->
         <div id="kt_app_content_container" class="app-container container-xxl">
+            <div class="card mb-5 mb-xl-10 shadow">
+                <div class="card-header border-0">
+                    <div class="card-title">
+                        <div class="d-flex align-items-center position-relative ">
+                            <h5>Listado de Productos</h5>
+                        </div>
+                    </div>
+                    <div class="card-toolbar">
+                        <div id="search-product"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dt-product" class="table no-footer">
+                            <thead>
+                                <tr class="fs-5 fw-bold" style="background-color: #f9f9f9;">
+                                    <th>Producto</th>
+                                    <th>Código</th>
+                                    <th>Cat</th>
+                                    <th>Sub Cat</th>
+                                    <th>P.Costo</th>
+                                    <th>P.Venta</th>
+                                    <th>P.Prof</th>
+                                    <th class="text-end"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($products as $p) { ?>
+                                    <tr class="fs-7" style="vertical-align: middle;">
+                                        <td><?php echo $p->productName; ?></td>
+                                        <td><?php echo $p->productCode; ?></td>
+                                        <td><?php echo $p->category; ?></td>
+                                        <td><?php echo $p->subCategory; ?></td>
+                                        <td>€<?php echo number_format($p->productCost, 2, ".", ','); ?></td>
+                                        <td>€<?php echo number_format($p->productPrice, 2, ".", ','); ?></td>
+                                        <td>€<?php echo number_format($p->profesionalProductPrice, 2, ".", ','); ?></td>
+                                        <td class="text-end">
+                                            <a data-product-id="<?php echo $p->productID; ?>" href="#" class="btn btn-sm btn-light btn-active-color-primary edit-product" title="Editar Producto"><i class="bi bi-pencil-square"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    $(document).ready(function() {
-        $('#add-product').on('click', function(e) {
-            e.preventDefault();
+    $('#add-product').on('click', function(e) {
+        e.preventDefault();
 
-            $.ajax({
-                type: "post",
-                url: "<?php echo base_url('ControlPanel/modalProduct'); ?>",
-                data: {
-                    'action': "create"
-                },
-                dataType: "html",
-                success: function(res) {
-                    $('#app-modal').html(res);
-                },
-                error: function(error) {
-                    simpleAlert('error', 'Ha ocurrido un error!', 'center');
-                }
-            });
+        $.ajax({
+            type: "post",
+            url: "<?php echo base_url('ControlPanel/modalProduct'); ?>",
+            data: {
+                'action': "create"
+            },
+            dataType: "html",
+            success: function(res) {
+                $('#app-modal').html(res);
+            },
+            error: function(error) {
+                simpleAlert('error', 'Ha ocurrido un error!', 'center');
+            }
         });
     });
+
+    var dtProduct = $('#dt-product').DataTable({ // Data Table
+        dom: 'RfrtlpiB',
+        destroy: true,
+        processing: true,
+        language: {
+            url: '<?php echo base_url('assets/js/dataTable/es.json'); ?>'
+        },
+        lengthMenu: [
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, "Todo"]
+        ],
+        buttons: [],
+        initComplete: function(settings, json) {
+            $('#search-product').html('');
+            $('#dt-product_filter').appendTo('#search-product');
+        }
+    }); // ok
+
+    dtProduct.on('click', '.edit-product', function(e) {
+        e.preventDefault();
+        let productID = $(this).attr('data-product-id');
+        $.ajax({
+            type: "post",
+            url: "<?php echo base_url('ControlPanel/modalProduct'); ?>",
+            data: {
+                'action': "update",
+                'productID': productID
+            },
+            dataType: "html",
+            success: function(res) {
+                $('#app-modal').html(res);
+            },
+            error: function(error) {
+                simpleAlert('error', 'Ha ocurrido un error!', 'center');
+            }
+        });
+    }); // ok
 </script>

@@ -70,7 +70,7 @@ class ControlPanel extends BaseController
         $data['totalSubCategory'] = sizeof($data['dtSubCategory']);
 
         return view('admin/categories/dtGroupCat', $data);
-    } // 0k
+    } // ok
 
     public function categoryDT()
     {
@@ -294,6 +294,7 @@ class ControlPanel extends BaseController
         $data = array();
         # menu
         $data['activeProducts'] = "active";
+        $data['products'] = $this->objControlPanelModel->getProductDT();
         # page
         $data['page'] = "admin/products/mainProducts";
 
@@ -308,6 +309,7 @@ class ControlPanel extends BaseController
 
         # params
         $action = $this->request->getPost('action');
+        $productID = $this->request->getPost('productID');
 
         $data = array();
         # data
@@ -315,8 +317,13 @@ class ControlPanel extends BaseController
         $data['action'] = $action;
         $data['categories'] = $this->objMainModel->objData('cat');
 
-        if($action == "create") {
+        if ($action == "create") {
             $data['modalTitle'] = "Nuevo Producto";
+        } else if ($action == "update") {
+            $data['modalTitle'] = "Editando Producto";
+            $data['product'] = $this->objMainModel->objData('product', $productID);
+            $data['catID'] = $data['product'][0]->id_cat;
+            $data['subCatID'] = $data['product'][0]->id_sub_cat;
         }
 
         return view('admin/products/modalProduct', $data);
@@ -326,12 +333,125 @@ class ControlPanel extends BaseController
     {
         # params
         $catID = $this->request->getPost('catID');
+        $subCatID = $this->request->getPost('subCatID');
 
         $data = array();
         # data
         $data['uniqid'] = uniqid();
+        $data['subCatID'] = $subCatID;
         $data['subCats'] = $this->objControlPanelModel->getSubCats(null, $catID);
 
         return view('admin/products/selSubCat', $data);
+    }
+
+    public function createProduct()
+    {
+        # Verify Session
+        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin') {
+            $result = array();
+            $result['error'] = 1;
+            $result['msg'] = "SESSION_EXPIRED";
+
+            return json_encode($result);
+        }
+
+        # params
+        $name = htmlspecialchars(trim($this->objRequest->getPost('name')));
+        $code = htmlspecialchars(trim($this->objRequest->getPost('code')));
+        $catID = htmlspecialchars(trim($this->objRequest->getPost('catID')));
+        $subCatID = htmlspecialchars(trim($this->objRequest->getPost('subCatID')));
+        $cost = htmlspecialchars(trim($this->objRequest->getPost('cost')));
+        $price = htmlspecialchars(trim($this->objRequest->getPost('price')));
+        $pprice = htmlspecialchars(trim($this->objRequest->getPost('pprice')));
+        $desc = htmlspecialchars(trim($this->objRequest->getPost('desc')));
+
+        $duplicateName = $this->objMainModel->objCheckDuplicate('product', 'name', $name);
+
+        if (empty($duplicateName)) {
+            $duplicateCode = $this->objMainModel->objCheckDuplicate('product', 'code', $code);
+            if (empty($duplicateCode)) {
+                $data = array();
+                $data['id_cat'] = $catID;
+                $data['id_sub_cat'] = $subCatID;
+                $data['name'] = $name;
+                $data['code'] = $code;
+                $data['cost'] = (float) $cost;
+                $data['price'] = (float) $price;
+                $data['profesional_price'] = (float) $pprice;
+                $data['description'] = $desc;
+
+                $result = $this->objMainModel->objCreate('product', $data);
+
+                return json_encode($result);
+            } else {
+                $result = array();
+                $result['error'] = 1;
+                $result['msg'] = "DUPLICATE_CODE";
+
+                return json_encode($result);
+            }
+        } else {
+            $result = array();
+            $result['error'] = 1;
+            $result['msg'] = "DUPLICATE_NAME";
+
+            return json_encode($result);
+        }
+    } // ok
+
+    public function updateProduct()
+    {
+        # Verify Session
+        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin') {
+            $result = array();
+            $result['error'] = 1;
+            $result['msg'] = "SESSION_EXPIRED";
+
+            return json_encode($result);
+        }
+
+        # params
+        $name = htmlspecialchars(trim($this->objRequest->getPost('name')));
+        $code = htmlspecialchars(trim($this->objRequest->getPost('code')));
+        $catID = htmlspecialchars(trim($this->objRequest->getPost('catID')));
+        $subCatID = htmlspecialchars(trim($this->objRequest->getPost('subCatID')));
+        $cost = htmlspecialchars(trim($this->objRequest->getPost('cost')));
+        $price = htmlspecialchars(trim($this->objRequest->getPost('price')));
+        $pprice = htmlspecialchars(trim($this->objRequest->getPost('pprice')));
+        $desc = htmlspecialchars(trim($this->objRequest->getPost('desc')));
+        $productID = htmlspecialchars(trim($this->objRequest->getPost('productID')));
+
+        $duplicateName = $this->objMainModel->objCheckDuplicate('product', 'name', $name, $productID);
+
+        if (empty($duplicateName)) {
+            $duplicateCode = $this->objMainModel->objCheckDuplicate('product', 'code', $code, $productID);
+            if (empty($duplicateCode)) {
+                $data = array();
+                $data['id_cat'] = $catID;
+                $data['id_sub_cat'] = $subCatID;
+                $data['name'] = $name;
+                $data['code'] = $code;
+                $data['cost'] = (float) $cost;
+                $data['price'] = (float) $price;
+                $data['profesional_price'] = (float) $pprice;
+                $data['description'] = $desc;
+
+                $result = $this->objMainModel->objUpdate('product', $data, $productID);
+
+                return json_encode($result);
+            } else {
+                $result = array();
+                $result['error'] = 1;
+                $result['msg'] = "DUPLICATE_CODE";
+
+                return json_encode($result);
+            }
+        } else {
+            $result = array();
+            $result['error'] = 1;
+            $result['msg'] = "DUPLICATE_NAME";
+
+            return json_encode($result);
+        }
     }
 }
