@@ -377,7 +377,12 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
-    } // ok
+    } 
+
+    public function uploadProductImg()
+    {
+        return json_encode($this->objMainModel->uploadFile('product', $_POST['productID'], 'photo', $_FILES['files']));
+    }
 
     public function updateProduct()
     {

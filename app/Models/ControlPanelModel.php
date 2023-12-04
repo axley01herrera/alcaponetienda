@@ -32,6 +32,7 @@ class ControlPanelModel extends Model
         $query = $this->db->table('product p')
         ->select('
         p.id AS productID,
+        p.photo AS photo,
         p.id_cat AS catID,
         p.id_sub_cat AS subCatID,
         p.name AS productName,

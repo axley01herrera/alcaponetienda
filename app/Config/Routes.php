@@ -40,6 +40,7 @@ $routes->post('ControlPanel/modalProduct', 'ControlPanel::modalProduct');
 $routes->post('ControlPanel/getSelSubCatsByCat', 'ControlPanel::getSelSubCatsByCat');
 $routes->post('ControlPanel/createProduct', 'ControlPanel::createProduct');
 $routes->post('ControlPanel/updateProduct', 'ControlPanel::updateProduct');
+$routes->post('ControlPanel/uploadProductImg', 'ControlPanel::uploadProductImg');
 
 #### 
 ## End Control Panel 

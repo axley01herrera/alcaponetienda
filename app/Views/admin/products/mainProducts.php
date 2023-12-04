@@ -68,7 +68,22 @@
                             <tbody>
                                 <?php foreach ($products as $p) { ?>
                                     <tr class="fs-7" style="vertical-align: middle;">
-                                        <td><?php echo $p->productName; ?></td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span href="" class="symbol symbol-50px">
+                                                    <?php
+                                                    if (empty($p->photo))
+                                                        $urlImage = 'background-image: url(' . base_url('public/assets/media/stock/ecommerce/76.png') . ')';
+                                                    else
+                                                        $urlImage = 'background-image: url(data:image/png;base64,' . base64_encode($p->photo) . ')';
+                                                    ?>
+                                                    <span class="symbol-label" style="<?php echo $urlImage; ?>"></span>
+                                                </span>
+                                                <div class="ms-5">
+                                                    <span class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?php echo $p->productName; ?></span>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td><?php echo $p->productCode; ?></td>
                                         <td><?php echo $p->category; ?></td>
                                         <td><?php echo $p->subCategory; ?></td>

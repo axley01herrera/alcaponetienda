@@ -6,6 +6,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <!-- Dropzone -->
+                <div class="dropzone mb-5" id="kt_dropzonejs_example_1">
+                    <div class="dz-message needsclick">
+                        <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+                        <div class="ms-4">
+                            <h3 class="fs-5 fw-bold text-gray-900 mb-1">Photo del Producto</h3>
+                            <span class="fs-7 fw-semibold text-gray-500">Sube una photo de tu producto!</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <!-- Name -->
                     <div class="col-12 mb-5">
@@ -34,17 +45,17 @@
                     <!-- Cost -->
                     <div class="col-12 col-md-4 col-lg-4 mb-5">
                         <label class="fs-6 fw-semibold" for="txt-cost<?php echo $uniqid; ?>">Costo <span class="text-danger">*</span></label>
-                        <input type="number" id="txt-cost<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>" value="<?php if(!empty($product[0]->cost)) echo number_format($product[0]->cost, 2, ".", ','); ?>">
+                        <input type="number" id="txt-cost<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>" value="<?php if (!empty($product[0]->cost)) echo $product[0]->cost; ?>">
                     </div>
                     <!-- Price -->
                     <div class="col-12 col-md-4 col-lg-4 mb-5">
                         <label class="fs-6 fw-semibold" for="txt-price<?php echo $uniqid; ?>">Precio <span class="text-danger">*</span></label>
-                        <input type="number" id="txt-price<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>" value="<?php if(!empty($product[0]->price)) echo number_format($product[0]->price, 2, ".", ','); ?>">
+                        <input type="number" id="txt-price<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>" value="<?php if (!empty($product[0]->price)) echo $product[0]->price; ?>">
                     </div>
                     <!-- Profesional Price -->
                     <div class="col-12 col-md-4 col-lg-4 mb-5">
                         <label class="fs-6 fw-semibold" for="txt-pprice<?php echo $uniqid; ?>">Precio Profesional <span class="text-danger">*</span></label>
-                        <input type="number" id="txt-pprice<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>" value="<?php if(!empty($product[0]->profesional_price)) echo number_format($product[0]->profesional_price, 2, ".", ','); ?>">
+                        <input type="number" id="txt-pprice<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>" value="<?php if (!empty($product[0]->profesional_price)) echo $product[0]->profesional_price; ?>">
                     </div>
                     <!-- Description -->
                     <div class="col-12">
@@ -65,13 +76,30 @@
     var action = "<?php echo $action; ?>";
     var catID = "<?php echo @$catID; ?>";
     var subCatID = "<?php echo @$subCatID; ?>";
+    var productID = "";
 
-    if(catID != "")
+    if (catID != "")
         getSelSubCatsByCat();
 
     $('#modal').modal('show');
     $('#modal').on('hidden.bs.modal', function(event) {
         $('#app-modal').html('');
+    });
+
+    var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
+        url: '<?php echo base_url('ControlPanel/uploadProductImg'); ?>',
+        method: 'post',
+        acceptedFiles: '.jpg,.png',
+        maxFiles: 1,
+        addRemoveLinks: true,
+        autoProcessQueue: false,
+        paramName: 'files',
+        init: function() {
+            kt_dropzonejs_example_1 = this;
+            this.on("sending", function(file, xhr, formData) {
+                formData.append("productID", productID);
+            });
+        }
     });
 
     $('#sel-cat<?php echo $uniqid; ?>').select2({ // Sel Cat 
@@ -117,6 +145,7 @@
             } else {
                 url = "<?php echo base_url("ControlPanel/updateProduct"); ?>";
                 msg = "Producto actualizado!";
+                productID = "<?php echo @$product[0]->id; ?>";
             }
 
             $.ajax({
@@ -136,10 +165,9 @@
                 dataType: "json",
                 success: function(res) {
                     if (res.error == 0) {
-                        simpleAlert('success', msg, 'center');
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, "2000");
+                        if (productID == "")
+                            productID = res.id;
+                        uploadPhoto(msg);
                     } else if (res.error == 1) {
                         if (res.msg == "DUPLICATE_NAME") {
                             simpleAlert('warning', 'Ya existe el producto!', 'center');
@@ -185,4 +213,21 @@
     $('.required<?php echo $uniqid; ?>').on('focus', function() {
         $(this).removeClass('is-invalid');
     });
+
+    function uploadPhoto(msg) {
+        if (myDropzone.files.length > 0) {
+            myDropzone.processQueue();
+            myDropzone.on("complete", function(response) {
+                simpleAlert('success', msg, 'center');
+                setTimeout(() => {
+                    window.location.reload();
+                }, "2000");
+            });
+        } else {
+            simpleAlert('success', msg, 'center');
+            setTimeout(() => {
+                window.location.reload();
+            }, "2000");
+        }
+    }
 </script>

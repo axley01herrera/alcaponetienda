@@ -75,4 +75,28 @@ class MainModel extends Model
 
         return $query->get()->getResult();
     }
+
+    public function uploadFile($table, $id, $field, $file)
+    {
+        $fileContent = file_get_contents($file['tmp_name']);
+
+        $data = array(
+            $field => $fileContent
+        );
+
+        $query = $this->db->table($table)
+            ->where('id', $id)
+            ->update($data);
+
+        $result = array();
+
+        if ($query == true) {
+            $result['error'] = 0;
+        } else {
+            $result['error'] = 1;
+            $result['msg'] = 'fail upload file';
+        }
+
+        return $result;
+    } // ok
 }
