@@ -3,11 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\HomeModel;
+use App\Models\MainModel;
 
 class Home extends BaseController
 {
     protected $objRequest;
     protected $objHomeModel;
+    protected $objMainModel;
 
     public function __construct()
     {
@@ -15,13 +17,18 @@ class Home extends BaseController
         $this->objRequest = \Config\Services::request();
         # Models
         $this->objHomeModel = new HomeModel;
+        $this->objMainModel = new MainModel;
         # Helper
         helper('Site');
     }
     
     public function index()
     {
-        return view('Home/landing');
+        $data = array();
+        # data
+        $data['categories'] = $this->objMainModel->objData('cat');
+
+        return view('Home/landing', $data);
     }
 
     public function products()

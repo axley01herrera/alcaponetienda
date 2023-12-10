@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php echo view('layouts/header'); ?>
+
 <body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank">
     <script>
         var themeMode = "light";
@@ -98,103 +99,16 @@
                             <div class="d-flex flex-center mb-5 mb-lg-15">
                                 <!-- Tabs -->
                                 <ul class="nav border-transparent flex-center fs-5 fw-bold">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 active" href="#" data-bs-toggle="tab" data-bs-target="#kt_landing_projects_latest">Latest</a>
-                                    </li>
+                                    <?php foreach ($categories as $cat) { ?>
+                                        <li class="nav-item">
+                                            <a id="tab-<?php echo $cat->id; ?>" class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#" data-bs-toggle="tab" ><?php echo $cat->cat; ?></a>
+                                        </li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                             <!-- Tabs content -->
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="kt_landing_projects_latest">
-                                    <!--begin::Row-->
-                                    <div class="row g-10">
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects" href="assets/media/stock/600x600/img-23.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px" style="background-image:url('assets/media/stock/600x600/img-23.jpg')"></div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="ki-duotone ki-eye fs-3x text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Row-->
-                                            <div class="row g-10 mb-10">
-                                                <!--begin::Col-->
-                                                <div class="col-lg-6">
-                                                    <!--begin::Item-->
-                                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="assets/media/stock/600x600/img-22.jpg">
-                                                        <!--begin::Image-->
-                                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('assets/media/stock/600x600/img-22.jpg')"></div>
-                                                        <!--end::Image-->
-                                                        <!--begin::Action-->
-                                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                            <i class="ki-duotone ki-eye fs-3x text-white">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                                <span class="path3"></span>
-                                                            </i>
-                                                        </div>
-                                                        <!--end::Action-->
-                                                    </a>
-                                                    <!--end::Item-->
-                                                </div>
-                                                <!--end::Col-->
-                                                <!--begin::Col-->
-                                                <div class="col-lg-6">
-                                                    <!--begin::Item-->
-                                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="assets/media/stock/600x600/img-21.jpg">
-                                                        <!--begin::Image-->
-                                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('assets/media/stock/600x600/img-21.jpg')"></div>
-                                                        <!--end::Image-->
-                                                        <!--begin::Action-->
-                                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                            <i class="ki-duotone ki-eye fs-3x text-white">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                                <span class="path3"></span>
-                                                            </i>
-                                                        </div>
-                                                        <!--end::Action-->
-                                                    </a>
-                                                    <!--end::Item-->
-                                                </div>
-                                                <!--end::Col-->
-                                            </div>
-                                            <!--end::Row-->
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="assets/media/stock/600x400/img-20.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('assets/media/stock/600x600/img-20.jpg')"></div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="ki-duotone ki-eye fs-3x text-white">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Row-->
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
