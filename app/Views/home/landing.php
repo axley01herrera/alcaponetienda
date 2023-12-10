@@ -107,9 +107,7 @@
                                 </ul>
                             </div>
                             <!-- Tabs content -->
-                            <div class="tab-content">
-                                
-                            </div>
+                            <div class="tab-content"></div>
                         </div>
                     </div>
                 </div>
@@ -117,5 +115,4 @@
         </div>
     </div>
 </body>
-
 </html>
