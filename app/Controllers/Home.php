@@ -19,13 +19,9 @@ class Home extends BaseController
         helper('Site');
     }
     
-    public function index(): string
+    public function index()
     {
-        $data = array();
-        # page
-        $data['page'] = 'home/products';
-
-        return view('Home/mainHome', $data);
+        return view('Home/landing');
     }
 
     public function products()
