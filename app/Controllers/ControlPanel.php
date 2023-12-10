@@ -54,7 +54,7 @@ class ControlPanel extends BaseController
         $data['page'] = "admin/categories/mainCategories";
 
         return view('layouts/controlPanel', $data);
-    } // ok
+    }
 
     public function groupCat()
     {
@@ -70,7 +70,7 @@ class ControlPanel extends BaseController
         $data['totalSubCategory'] = sizeof($data['dtSubCategory']);
 
         return view('admin/categories/dtGroupCat', $data);
-    } // ok
+    }
 
     public function categoryDT()
     {
@@ -83,7 +83,7 @@ class ControlPanel extends BaseController
         $data['categories'] = $this->objMainModel->objData('cat');
 
         return view('admin/categories/dtCat', $data);
-    } // ok
+    }
 
     public function modalCat()
     {
@@ -108,7 +108,7 @@ class ControlPanel extends BaseController
         }
 
         return view('admin/categories/modalCat', $data);
-    } // ok
+    }
 
     public function createCat()
     {
@@ -136,7 +136,7 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
-    } // ok
+    }
 
     public function updateCat()
     {
@@ -165,7 +165,7 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
-    } // ok
+    }
 
     public function subCategoryDT()
     {
@@ -178,7 +178,7 @@ class ControlPanel extends BaseController
         $data['subCategories'] = $this->objMainModel->objData('sub_cat');
 
         return view('admin/categories/dtSubCat', $data);
-    } // ok
+    }
 
     public function modalSubCat()
     {
@@ -206,7 +206,7 @@ class ControlPanel extends BaseController
         }
 
         return view('admin/categories/modalSubCat', $data);
-    } // ok
+    }
 
     public function createSubCat()
     {
@@ -230,7 +230,7 @@ class ControlPanel extends BaseController
         $result = $this->objMainModel->objCreate('sub_cat', $data);
 
         return json_encode($result);
-    } // ok
+    }
 
     public function updateSubCat()
     {
@@ -255,7 +255,7 @@ class ControlPanel extends BaseController
         $result = $this->objMainModel->objUpdate('sub_cat', $data, $subCatID);
 
         return json_encode($result);
-    } // ok
+    }
 
     ####
     ## End Section Cat

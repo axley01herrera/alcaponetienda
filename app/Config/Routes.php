@@ -5,7 +5,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
+#### 
+## Home 
+####
+
 $routes->get('/', 'Home::index');
+$routes->post('Home/products', 'Home::products');
 
 #### 
 ## Auth 
