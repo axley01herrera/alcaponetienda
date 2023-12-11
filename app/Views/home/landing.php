@@ -122,6 +122,133 @@
                 </div>
             </div>
 
+            <div class="container">
+                <div class="text-center mb-17">
+                    <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">Lo que dicen nuestros clientes!</h3>
+                    <div class="fs-5 text-muted fw-bold">Opiniones de Nuestros Clientes
+                        <br>recogidas de diferentes medios y redes sociales.
+                    </div>
+                </div>
+                <div class="row g-lg-10 mb-10 mb-lg-20">
+                    <div class="col-lg-4">
+                        <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                            <div class="mb-7">
+                                <div class="rating mb-6">
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                </div>
+                                <div class="fs-2 fw-bold text-dark mb-3">Calidad
+                                    <br>en los productos
+                                </div>
+                                <div class="text-gray-500 fw-semibold fs-4">Al trabajar con primeras marcas la calidad de los productos y herramientas son exepcionales.</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="symbol symbol-circle symbol-50px me-5">
+                                    <img src="<?php echo base_url('public/assets/media/avatars/300-1.jpg'); ?>" class="" alt="">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Paul Miles</a>
+                                    <span class="text-muted d-block fw-bold">Profesional de Barbería</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                            <div class="mb-7">
+                                <div class="rating mb-6">
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                </div>
+                                <div class="fs-2 fw-bold text-dark mb-3">Seriedad
+                                    <br>y confianza
+                                </div>
+                                <div class="text-gray-500 fw-semibold fs-4">El equipo de Alcapone Tiendas brinda un sensación en todo momento de profesionalidad.</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="symbol symbol-circle symbol-50px me-5">
+                                    <img src="<?php echo base_url('public/assets/media/avatars/300-2.jpg'); ?>" class="" alt="">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Janya Clebert</a>
+                                    <span class="text-muted d-block fw-bold">Profesional de Peluquería</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                            <div class="mb-7">
+                                <div class="rating mb-6">
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                    <div class="rating-label me-2 checked">
+                                        <i class="ki-duotone ki-star fs-5"></i>
+                                    </div>
+                                </div>
+                                <div class="fs-2 fw-bold text-dark mb-3">Buen servicio
+                                    <br>y atención al cliente
+                                </div>
+                                <div class="text-gray-500 fw-semibold fs-4">En mi experiencia el servicio y la atención al cliente de Alcapone Tiendas es exelente.</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="symbol symbol-circle symbol-50px me-5">
+                                    <img src="<?php echo base_url('public/assets/media/avatars/300-15.jpg'); ?>" class="" alt="">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Raúl Lopez</a>
+                                    <span class="text-muted d-block fw-bold">Profesional de Barbería</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13" style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
+                    <div class="my-2 me-5">
+                        <div class="fs-1 fs-lg-2qx fw-bold text-white mb-2">Eres un profesional del sector,
+                            <span class="fw-normal">Barbería y/o Peluquería!</span>
+                        </div>
+                        <div class="fs-6 fs-lg-5 text-white fw-semibold opacity-75">Tenemos descuentos especiales para tí en todos nuestros productos!</div>
+                    </div>
+                    <a href="·" class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Soy Profesional</a>
+                </div>
+            </div>
             <div class="mb-0">
                 <div class="landing-curve landing-dark-color">
                     <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +292,7 @@
                                 </a>
                             </div>
                             <ul class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
-                                
+
                             </ul>
                         </div>
                     </div>
