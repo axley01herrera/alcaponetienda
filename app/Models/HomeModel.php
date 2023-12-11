@@ -14,11 +14,25 @@ class HomeModel extends Model
         $this->db = \Config\Database::connect();
     }
 
-    public function getProducts()
+    public function getSubCategoriesByCatID($catID)
+    {
+        $query = $this->db->table('sub_cat')
+        ->where('id_cat', $catID);
+
+        $data = $query->get()->getResult();
+
+        return $data;
+    }
+
+    public function getProductsBy($filter = null, $value = null)
     {
         $query = $this->db->table('product');
+
+        if(!empty($filter))
+            $query->where($filter, $value);
         
         $data = $query->get()->getResult();
+
         return $data;
     }
 }

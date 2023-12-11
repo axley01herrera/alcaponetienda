@@ -31,14 +31,30 @@ class Home extends BaseController
         return view('Home/landing', $data);
     }
 
-    public function products()
+    public function getCatContent()
     {
+        # params
+        $catID = $this->objRequest->getPost('catID');
+
         $data = array();
         # data
-        $data['products'] = $this->objHomeModel->getProducts();
-
+        $data['subCategories'] = $this->objHomeModel->getSubCategoriesByCatID($catID);
         # page
-        $view = 'home/mainProducts';
+        $view = 'home/catContent';
+
+        return view($view, $data);
+    }
+
+    public function getSubCatContent()
+    {
+        # params
+        $subcCatID = $this->objRequest->getPost('subCatID');
+
+        $data = array();
+        # data
+        $data['products'] = $this->objHomeModel->getProductsBy('id_sub_cat', $subcCatID);
+        # page
+        $view = 'home/subCatContent';
 
         return view($view, $data);
     }

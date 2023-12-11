@@ -11,7 +11,8 @@ use CodeIgniter\Router\RouteCollection;
 ####
 
 $routes->get('/', 'Home::index');
-$routes->post('Home/products', 'Home::products');
+$routes->post('Home/getCatContent', 'Home::getCatContent');
+$routes->post('Home/getSubCatContent', 'Home::getSubCatContent');
 
 #### 
 ## Auth 
@@ -19,10 +20,6 @@ $routes->post('Home/products', 'Home::products');
 
 $routes->get('Auth/admin', 'Auth::admin');
 $routes->post('Auth/loginAdmin', 'Auth::loginAdmin');
-
-#### 
-## End Auth 
-####
 
 #### 
 ## Control Panel 
@@ -47,8 +44,4 @@ $routes->post('ControlPanel/getSelSubCatsByCat', 'ControlPanel::getSelSubCatsByC
 $routes->post('ControlPanel/createProduct', 'ControlPanel::createProduct');
 $routes->post('ControlPanel/updateProduct', 'ControlPanel::updateProduct');
 $routes->post('ControlPanel/uploadProductImg', 'ControlPanel::uploadProductImg');
-
-#### 
-## End Control Panel 
-####
 

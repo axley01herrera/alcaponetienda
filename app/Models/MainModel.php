@@ -98,5 +98,5 @@ class MainModel extends Model
         }
 
         return $result;
-    } // ok
+    } 
 }
