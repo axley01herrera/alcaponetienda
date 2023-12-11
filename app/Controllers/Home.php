@@ -28,7 +28,7 @@ class Home extends BaseController
         # data
         $data['categories'] = $this->objMainModel->objData('cat');
 
-        return view('Home/landing', $data);
+        return view('home/landing', $data);
     }
 
     public function getCatContent()
