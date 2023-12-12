@@ -116,7 +116,7 @@
                                 <!-- Name -->
                                 <div class="col-12 col-md-6 col-lg-6 mb-5">
                                     <label class="fs-6 fw-semibold" for="txt-name<?php echo $uniqid; ?>">Name <span class="text-danger">*</span></label>
-                                    <input type="text" id="txt-name<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>" value="<?php echo @$product[0]->name; ?>">
+                                    <input type="text" id="txt-name<?php echo $uniqid; ?>" class="form-control required<?php echo $uniqid; ?>" value="<?php echo @strtoupper($product[0]->name); ?>">
                                 </div>
                                 <!-- Code -->
                                 <div class="col-12 col-lg-6 mb-5">

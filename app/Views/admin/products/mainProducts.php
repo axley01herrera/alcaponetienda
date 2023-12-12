@@ -79,7 +79,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url('ControlPanel/productDetail?productID=') . $p->productID; ?>"><?php echo $p->productName; ?></a>
+                                            <a href="<?php echo base_url('ControlPanel/productDetail?productID=') . $p->productID; ?>"><?php echo strtoupper($p->productName); ?></a>
                                         </td>
                                         <td><?php echo $p->productCode; ?></td>
                                         <td><?php echo $p->category; ?></td>
