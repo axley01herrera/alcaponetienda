@@ -197,7 +197,7 @@
                                 <div class="fs-2 fw-bold text-dark mb-3">Seriedad
                                     <br>y confianza
                                 </div>
-                                <div class="text-gray-500 fw-semibold fs-4">El equipo de Alcapone Tiendas brinda un sensación en todo momento de profesionalidad.</div>
+                                <div class="text-gray-500 fw-semibold fs-4">El equipo de Alcapone Tiendas brinda una sensación en todo momento de profesionalidad.</div>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="symbol symbol-circle symbol-50px me-5">
