@@ -27,6 +27,10 @@ class HomeModel extends Model
     public function getProductsBy($filter = null, $value = null)
     {
         $query = $this->db->table('product');
+        
+        $query->groupStart();
+        $query->where('status', 1);
+        $query->groupEnd();
 
         if(!empty($filter))
             $query->where($filter, $value);

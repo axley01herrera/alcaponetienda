@@ -22,12 +22,6 @@
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px" data-kt-menu="true" style="">
                         <!-- Menu item -->
                         <div class="menu-item px-3">
-                            <div class="menu-content fs-6 text-dark fw-bold px-3 py-4">Acciones</div>
-                        </div>
-                        <!-- Menu separator -->
-                        <div class="separator mb-3 opacity-75"></div>
-                        <!-- Menu item -->
-                        <div class="menu-item px-3">
                             <a id="add-product" href="#" class="menu-link px-3">Agregar Producto</a>
                         </div>
                     </div>
@@ -55,6 +49,7 @@
                         <table id="dt-product" class="table no-footer">
                             <thead>
                                 <tr class="fs-5 fw-bold" style="background-color: #f9f9f9;">
+                                    <th></th>
                                     <th>Producto</th>
                                     <th>Código</th>
                                     <th>Cat</th>
@@ -62,6 +57,8 @@
                                     <th>P.Costo</th>
                                     <th>P.Venta</th>
                                     <th>P.Prof</th>
+                                    <th>Stock</th>
+                                    <th class="text-center"></th>
                                     <th class="text-end"></th>
                                 </tr>
                             </thead>
@@ -73,16 +70,16 @@
                                                 <span href="" class="symbol symbol-50px">
                                                     <?php
                                                     if (empty($p->photo))
-                                                        $urlImage = 'background-image: url(' . base_url('public/assets/media/stock/ecommerce/76.png') . ')';
+                                                        $urlImage = 'background-image: url(' . base_url('public/assets/media/avatars/img.png') . ')';
                                                     else
                                                         $urlImage = 'background-image: url(data:image/png;base64,' . base64_encode($p->photo) . ')';
                                                     ?>
                                                     <span class="symbol-label" style="<?php echo $urlImage; ?>"></span>
                                                 </span>
-                                                <div class="ms-5">
-                                                    <span class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?php echo $p->productName; ?></span>
-                                                </div>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo base_url('ControlPanel/productDetail?productID=') . $p->productID; ?>"><?php echo $p->productName; ?></a>
                                         </td>
                                         <td><?php echo $p->productCode; ?></td>
                                         <td><?php echo $p->category; ?></td>
@@ -90,6 +87,15 @@
                                         <td>€<?php echo number_format($p->productCost, 2, ".", ','); ?></td>
                                         <td>€<?php echo number_format($p->productPrice, 2, ".", ','); ?></td>
                                         <td>€<?php echo number_format($p->profesionalProductPrice, 2, ".", ','); ?></td>
+                                        <td><?php echo $p->stock; ?></td>
+                                        <td class="text-center">
+                                            <?php if ($p->status == 1) { ?>
+                                                <span class="badge badge-light-success">Activo</span>
+                                            <?php }
+                                            if ($p->status == 0) { ?>
+                                                <span class="badge badge-light-danger">Inactivo</span>
+                                            <?php } ?>
+                                        </td>
                                         <td class="text-end">
                                             <a data-product-id="<?php echo $p->productID; ?>" href="#" class="btn btn-sm btn-light btn-active-color-primary edit-product" title="Editar Producto"><i class="bi bi-pencil-square"></i></a>
                                         </td>
@@ -122,7 +128,7 @@
                 simpleAlert('error', 'Ha ocurrido un error!', 'center');
             }
         });
-    });
+    }); // ok
 
     var dtProduct = $('#dt-product').DataTable({ // Data Table
         dom: 'RfrtlpiB',
@@ -136,6 +142,9 @@
             [10, 25, 50, 100, "Todo"]
         ],
         buttons: [],
+        order: [
+            [1, 'asc']
+        ],
         initComplete: function(settings, json) {
             $('#search-product').html('');
             $('#dt-product_filter').appendTo('#search-product');

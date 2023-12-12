@@ -40,6 +40,14 @@
                                         <div class="menu-item">
                                             <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#cat" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Catálogo</a>
                                         </div>
+                                        <!-- Item -->
+                                        <div class="menu-item">
+                                            <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#op" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Opiniones</a>
+                                        </div>
+                                        <!-- Item -->
+                                        <div class="menu-item">
+                                            <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#prof" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Profesionales</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +130,7 @@
                 </div>
             </div>
 
-            <div class="container">
+            <div id="op" class="container">
                 <div class="text-center mb-17">
                     <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">Lo que dicen nuestros clientes!</h3>
                     <div class="fs-5 text-muted fw-bold">Opiniones de Nuestros Clientes
@@ -239,7 +247,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13" style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
+                <div id="prof" class="d-flex flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13" style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
                     <div class="my-2 me-5">
                         <div class="fs-1 fs-lg-2qx fw-bold text-white mb-2">Eres un profesional del sector,
                             <span class="fw-normal">Barbería y/o Peluquería!</span>
@@ -292,7 +300,9 @@
                                 </a>
                             </div>
                             <ul class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
-
+                                <li class="menu-item">
+                                    <a href="<?php echo base_url('Auth/admin'); ?>" target="_blank" class="menu-link px-2">Administrador</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

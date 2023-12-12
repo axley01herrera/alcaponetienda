@@ -39,9 +39,15 @@ $routes->post('ControlPanel/createSubCat', 'ControlPanel::createSubCat');
 $routes->post('ControlPanel/updateSubCat', 'ControlPanel::updateSubCat');
 # Control Panel -> Products
 $routes->get('ControlPanel/products', 'ControlPanel::products');
+$routes->get('ControlPanel/productDetail', 'ControlPanel::productDetail');
 $routes->post('ControlPanel/modalProduct', 'ControlPanel::modalProduct');
 $routes->post('ControlPanel/getSelSubCatsByCat', 'ControlPanel::getSelSubCatsByCat');
 $routes->post('ControlPanel/createProduct', 'ControlPanel::createProduct');
 $routes->post('ControlPanel/updateProduct', 'ControlPanel::updateProduct');
 $routes->post('ControlPanel/uploadProductImg', 'ControlPanel::uploadProductImg');
+$routes->post('ControlPanel/removeProductImg', 'ControlPanel::removeProductImg');
+$routes->post('ControlPanel/changeProductStatus', 'ControlPanel::changeProductStatus');
+$routes->post('ControlPanel/productUpdateCat', 'ControlPanel::productUpdateCat');
+$routes->post('ControlPanel/productUpdateSubCat', 'ControlPanel::productUpdateSubCat');
+
 

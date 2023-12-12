@@ -1,0 +1,1 @@
+ALTER TABLE `product` ADD `stock` INT NOT NULL DEFAULT '0' AFTER `status`; 

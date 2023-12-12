@@ -314,12 +314,14 @@ class ControlPanel extends BaseController
         # params
         $catID = $this->request->getPost('catID');
         $subCatID = $this->request->getPost('subCatID');
+        $dropdownParent = $this->request->getPost('dropdownParent');
 
         $data = array();
         # data
         $data['uniqid'] = uniqid();
         $data['subCatID'] = $subCatID;
         $data['subCats'] = $this->objControlPanelModel->getSubCats(null, $catID);
+        $data['dropdownParent'] = $dropdownParent;
 
         return view('admin/products/selSubCat', $data);
     }
@@ -343,6 +345,7 @@ class ControlPanel extends BaseController
         $cost = htmlspecialchars(trim($this->objRequest->getPost('cost')));
         $price = htmlspecialchars(trim($this->objRequest->getPost('price')));
         $pprice = htmlspecialchars(trim($this->objRequest->getPost('pprice')));
+        $stock = htmlspecialchars(trim($this->objRequest->getPost('stock')));
         $desc = htmlspecialchars(trim($this->objRequest->getPost('desc')));
 
         $duplicateName = $this->objMainModel->objCheckDuplicate('product', 'name', $name);
@@ -357,6 +360,7 @@ class ControlPanel extends BaseController
                 $data['code'] = $code;
                 $data['cost'] = (float) $cost;
                 $data['price'] = (float) $price;
+                $data['stock'] = (int) $stock;
                 $data['profesional_price'] = (float) $pprice;
                 $data['description'] = $desc;
 
@@ -377,11 +381,17 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
-    } 
+    }
 
     public function uploadProductImg()
     {
-        return json_encode($this->objMainModel->uploadFile('product', $_POST['productID'], 'photo', $_FILES['files']));
+        # params
+        $productID = $_POST['productID'];
+        $files = $_FILES['files'];
+
+        $result = $this->objMainModel->uploadFile('product', $productID, 'photo', $files);
+
+        return json_encode($result);
     }
 
     public function updateProduct()
@@ -403,6 +413,7 @@ class ControlPanel extends BaseController
         $cost = htmlspecialchars(trim($this->objRequest->getPost('cost')));
         $price = htmlspecialchars(trim($this->objRequest->getPost('price')));
         $pprice = htmlspecialchars(trim($this->objRequest->getPost('pprice')));
+        $stock = htmlspecialchars(trim($this->objRequest->getPost('stock')));
         $desc = htmlspecialchars(trim($this->objRequest->getPost('desc')));
         $productID = htmlspecialchars(trim($this->objRequest->getPost('productID')));
 
@@ -418,6 +429,7 @@ class ControlPanel extends BaseController
                 $data['code'] = $code;
                 $data['cost'] = (float) $cost;
                 $data['price'] = (float) $price;
+                $data['stock'] = (int) $stock;
                 $data['profesional_price'] = (float) $pprice;
                 $data['description'] = $desc;
 
@@ -438,5 +450,86 @@ class ControlPanel extends BaseController
 
             return json_encode($result);
         }
+    }
+
+    public function productDetail()
+    {
+        # Verify Session
+        if (empty($this->objSession->get('user')) || $this->objSession->get('user')['rol'] != 'admin')
+            return view('layouts/logoutAdmin');
+
+        # params
+        $productID = $this->objRequest->getGet('productID');
+
+        $data = array();
+        # menu
+        $data['activeProducts'] = "active";
+        $data['products'] = $this->objControlPanelModel->getProductDT();
+        # data
+        $data['productID'] = $productID;
+        $data['product'] = $this->objMainModel->objData('product', $productID);
+        $data['categories'] = $this->objMainModel->objData('cat');
+        $data['catID'] = $data['product'][0]->id_cat;
+        $data['subCatID'] = $data['product'][0]->id_sub_cat;
+        $data['uniqid'] = uniqid();
+        # page
+        $data['page'] = "admin/products/productDetail";
+
+        return view('layouts/controlPanel', $data);
+    }
+
+    public function removeProductImg()
+    {
+        # params
+        $productID = $this->objRequest->getPost('productID');
+
+        $data = array();
+        $data['photo'] = '';
+
+        $result = $this->objMainModel->objUpdate('product', $data, $productID);
+
+        return json_encode($result);
+    }
+
+    public function changeProductStatus()
+    {
+        # params
+        $productID = $this->objRequest->getPost('productID');
+        $status = $this->objRequest->getPost('status');
+
+        $data = array();
+        $data['status'] = $status;
+
+        $result = $this->objMainModel->objUpdate('product', $data, $productID);
+
+        return json_encode($result);
+    }
+
+    public function productUpdateCat()
+    {
+        # params
+        $productID = $this->objRequest->getPost('productID');
+        $catID = $this->objRequest->getPost('catID');
+
+        $data = array();
+        $data['id_cat'] = $catID;
+
+        $result = $this->objMainModel->objUpdate('product', $data, $productID);
+
+        return json_encode($result);
+    }
+
+    public function productUpdateSubCat()
+    {
+        # params
+        $productID = $this->objRequest->getPost('productID');
+        $subCatID = $this->objRequest->getPost('subCatID');
+
+        $data = array();
+        $data['id_sub_cat'] = $subCatID;
+
+        $result = $this->objMainModel->objUpdate('product', $data, $productID);
+
+        return json_encode($result);
     }
 }

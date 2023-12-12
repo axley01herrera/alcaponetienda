@@ -40,6 +40,8 @@ class ControlPanelModel extends Model
         p.cost AS productCost,
         p.price AS productPrice,
         p.profesional_price AS profesionalProductPrice,
+        p.status AS status,
+        p.stock AS stock,
         cat.cat AS category,
         sub_cat.sub_category AS subCategory
         ');
