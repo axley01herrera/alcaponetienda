@@ -48,12 +48,19 @@ class MainModel extends Model
 
     public function objDelete($table, $id)
     {
+        $result = array();
+
         $this->db->table($table)
             ->where('id', $id)
             ->delete();
 
-        return $this->resultID;
-    }
+        if ($this->resultID)
+            $result['error'] = 0;
+        else
+            $result['error'] = 1;
+
+        return $result;
+    } 
 
     public function objCheckDuplicate($table, $field, $value, $id = null)
     {

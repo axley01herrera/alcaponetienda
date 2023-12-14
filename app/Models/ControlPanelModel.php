@@ -25,7 +25,7 @@ class ControlPanelModel extends Model
             $query->where('id_cat', $catID);
 
         return $query->get()->getResult();
-    } // ok
+    }
 
     public function getProductDT()
     {
@@ -52,5 +52,15 @@ class ControlPanelModel extends Model
         $data = $query->get()->getResult();
 
         return $data;
-    } // ok
+    }
+
+    public function getProductImgs($productID)
+    {
+        $query = $this->db->table('product_img')
+        ->where('productID', $productID);
+
+        $data = $query->get()->getResult();
+
+        return $data;
+    }
 }

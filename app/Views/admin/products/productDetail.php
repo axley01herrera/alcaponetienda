@@ -187,12 +187,21 @@
                             <div class="card-toolbar"></div>
                         </div>
                         <div class="card-body pt-0" data-select2-id="select2-data-130-uoiu">
-                            <div class="overlay-wrapper h-300px bgi-no-repeat bgi-size-contain bgi-position-center image-placeholder-dozzy-1-1"></div>
-                            <div class="overlay-layer card-rounded bg-dark bg-opacity-10 align-items-end pb-3">
-                                <!--begin::Path-->
-                                <code class="py-2 px-4">
-                                    assets/media/illustrations/dozzy-1/1.png </code>
-                                <!--end::Path-->
+                            <div class="row">
+                                <?php foreach ($productImgs as $img) { ?>
+                                    <div class="col-12 col-md-6 col-lg-4 mb-5">
+                                        <div class="card card-flush flex-row-fluid p-6 pb-5 mw-100">
+                                            <div class="card-body text-center">
+                                                <img src="data:image/png;base64,<?php echo base64_encode($img->img); ?>" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="">                                                <!--end::Food img-->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 text-end">
+                                                    <a href="#" class="del-img<?php echo $uniqid;?>" data-product-img-id="<?php echo $img->id; ?>"><i class="bi bi-trash fs-2 text-danger"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -451,5 +460,31 @@
             });
         } else
             simpleAlert('warning', 'No hay archivos que subir', 'center');
+    });
+</script>
+
+<!-- Del Product Img -->
+<script>
+    $('.del-img<?php echo $uniqid;?>').on('click', function (e) {
+        e.preventDefault();
+        let productImgID = $(this).attr('data-product-img-id');
+
+        $.ajax({
+            type: "post",
+            url: "<?php echo base_url('ControlPanel/delProductImg'); ?>",
+            data: {
+                'productImgID': productImgID
+            },
+            dataType: "json",
+            success: function (res) {
+                if(res.error == 0)
+                    window.location.reload();
+                else
+                    simpleAlert('error', 'Ha ocurrido un error', 'center');
+            },
+            error: function (e) {
+                simpleAlert('error', 'Ha ocurrido un error', 'center');
+            }
+        });
     });
 </script>

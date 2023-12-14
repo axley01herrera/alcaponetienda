@@ -50,5 +50,6 @@ $routes->post('ControlPanel/changeProductStatus', 'ControlPanel::changeProductSt
 $routes->post('ControlPanel/productUpdateCat', 'ControlPanel::productUpdateCat');
 $routes->post('ControlPanel/productUpdateSubCat', 'ControlPanel::productUpdateSubCat');
 $routes->post('ControlPanel/uploadProductImgs', 'ControlPanel::uploadProductImgs');
+$routes->post('ControlPanel/delProductImg', 'ControlPanel::delProductImg');
 
 

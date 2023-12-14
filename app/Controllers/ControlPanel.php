@@ -468,6 +468,7 @@ class ControlPanel extends BaseController
         # data
         $data['productID'] = $productID;
         $data['product'] = $this->objMainModel->objData('product', $productID);
+        $data['productImgs'] = $this->objControlPanelModel->getProductImgs($productID);
         $data['categories'] = $this->objMainModel->objData('cat');
         $data['catID'] = $data['product'][0]->id_cat;
         $data['subCatID'] = $data['product'][0]->id_sub_cat;
@@ -551,6 +552,14 @@ class ControlPanel extends BaseController
             $result = $this->objMainModel->uploadProductImgs($productID, $file);
         }
 
+        return json_encode($result);
+    }
+
+    public function delProductImg()
+    {
+        # params
+        $productImgID = $this->objRequest->getPost('productImgID');
+        $result = $this->objMainModel->objDelete('product_img', $productImgID);
         return json_encode($result);
     }
 }
