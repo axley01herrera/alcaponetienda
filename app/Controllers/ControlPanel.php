@@ -532,4 +532,25 @@ class ControlPanel extends BaseController
 
         return json_encode($result);
     }
+
+    public function uploadProductImgs()
+    {
+        # params
+        $productID = $_POST['productID'];
+        $files = $_FILES['files'];
+
+        foreach ($files['name'] as $index => $fileName) {
+            $file = array(
+                'name' => $fileName,
+                'type' => $files['type'][$index],
+                'tmp_name' => $files['tmp_name'][$index],
+                'error' => $files['error'][$index],
+                'size' => $files['size'][$index]
+            );
+
+            $result = $this->objMainModel->uploadProductImgs($productID, $file);
+        }
+
+        return json_encode($result);
+    }
 }

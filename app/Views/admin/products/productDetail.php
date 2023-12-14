@@ -154,6 +154,48 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card card-flush py-4" data-select2-id="select2-data-131-50oa">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Sube fotos de tu producto</h2>
+                            </div>
+                            <div class="card-toolbar"></div>
+                        </div>
+                        <div class="card-body pt-0" data-select2-id="select2-data-130-uoiu">
+                            <!-- Dropzone -->
+                            <div class="dropzone mb-5" id="kt_dropzonejs_example_1">
+                                <div class="dz-message needsclick">
+                                    <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+                                    <div class="ms-4">
+                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">Fotos</h3>
+                                        <span class="fs-7 fw-semibold text-gray-500">Click para seleccionar!</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-end">
+                                    <button id="upload-<?php echo $uniqid; ?>" type="button" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-flush py-4" data-select2-id="select2-data-131-50oa">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Photos del Producto</h2>
+                            </div>
+                            <div class="card-toolbar"></div>
+                        </div>
+                        <div class="card-body pt-0" data-select2-id="select2-data-130-uoiu">
+                            <div class="overlay-wrapper h-300px bgi-no-repeat bgi-size-contain bgi-position-center image-placeholder-dozzy-1-1"></div>
+                            <div class="overlay-layer card-rounded bg-dark bg-opacity-10 align-items-end pb-3">
+                                <!--begin::Path-->
+                                <code class="py-2 px-4">
+                                    assets/media/illustrations/dozzy-1/1.png </code>
+                                <!--end::Path-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -376,5 +418,38 @@
     }
     $('.required<?php echo $uniqid; ?>').on('focus', function() {
         $(this).removeClass('is-invalid');
+    });
+</script>
+
+<!-- Drop Zone Media -->
+<script>
+    var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
+        url: '<?php echo base_url('ControlPanel/uploadProductImgs'); ?>',
+        method: 'post',
+        acceptedFiles: '.jpg,.png',
+        maxFiles: 5,
+        addRemoveLinks: true,
+        autoProcessQueue: false,
+        paramName: 'files',
+        uploadMultiple: true,
+        init: function() {
+            kt_dropzonejs_example_1 = this;
+            this.on("sending", function(file, xhr, formData) {
+                formData.append("productID", productID);
+            });
+        }
+    });
+
+    $('#upload-<?php echo $uniqid; ?>').on('click', function() {
+        if (myDropzone.files.length > 0) {
+            myDropzone.processQueue();
+            myDropzone.on("complete", function(response) {
+                simpleAlert('success', 'Archivos subidos', 'center');
+                setTimeout(() => {
+                    window.location.reload();
+                }, "2000");
+            });
+        } else
+            simpleAlert('warning', 'No hay archivos que subir', 'center');
     });
 </script>

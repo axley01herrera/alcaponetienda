@@ -98,5 +98,29 @@ class MainModel extends Model
         }
 
         return $result;
-    } 
+    }
+
+    public function uploadProductImgs($productID, $file)
+    {
+        $fileContent = file_get_contents($file['tmp_name']);
+
+        $data = array(
+            'productID' => $productID,
+            'img' => $fileContent
+        );
+
+        $this->db->table('product_img')
+            ->insert($data);
+
+        if ($this->db->resultID !== null) {
+            $result = array();
+            $result['error'] = 0;
+            $result['id'] = $this->db->connID->insert_id;
+        } else {
+            $result = array();
+            $result['error'] = 1;
+        }
+
+        return $result;
+    }
 }
